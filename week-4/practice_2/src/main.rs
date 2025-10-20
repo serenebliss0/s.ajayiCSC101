@@ -5,7 +5,7 @@ fn main() {
     let mut input1 = String::new();
     let mut input2 = String::new();
     let mut input3 = String::new();
-    
+
     println!("Enter first edge of triangle");
     io::stdin().read_line(&mut input1).expect("Failed to read line");
     let edge1: f32 = input1.trim().parse().expect("Please type a valid number!");
@@ -24,5 +24,5 @@ fn main() {
     area = area.sqrt();
 
     println!("The area of the triangle is {}", area);
-
+    //prints area
 }
