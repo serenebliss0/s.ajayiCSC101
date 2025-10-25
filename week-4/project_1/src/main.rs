@@ -4,6 +4,8 @@ use std::io;
 
 fn main()
 {
+    loop{
+
     //declaring variables to store coefficients
     let mut a_input = String::new();
     let mut b_input = String::new();
@@ -52,6 +54,26 @@ fn main()
     
     else 
     {
-        println!("No real roots");
+        //complex roots
+        let real_part =  (-b / (2.0 *a));
+        let imaginary_part = ((-discriminant).sqrt()) / (2.0 * a);
+        println!("There are no real roots!");
+        println!("The complex roots of the equation are\n");
+        println!("{:.2} + {:.2}i and {:.2} - {:.2}i",real_part,imaginary_part,real_part,imaginary_part);
     }
+
+    println!("Do you want to find the roots of another equation?\nChoose y or n");
+
+    let mut input_1 = String::new();
+    io::stdin().read_line(&mut input_1).expect("Enter y or n");
+    let mut  option_1:String = input_1.trim().parse().expect("Enter y or n");
+
+    //allows the user to input another equation as many times as they want
+    if option_1 != "y"
+    {
+        println!("Goodbye");
+        break;
+    }
+   
+}
 }
