@@ -116,15 +116,12 @@ fn main()
     }
             match years_of_experience
         {
-            0..2 => println!("With position [{}] and [{}] years of experience, you are rated [APS 1-2] ", title, years_of_experience),
-            3..5 => println!("With position [{}] and [{}] years of experience, you are rated [APS 3-5]", title, years_of_experience),
-            5..8 => println!("With position [{}] and [{}] years of experience, you are rated [APS 5-8]", title, years_of_experience),
-            8..10 => println!("With position [{}] and [{}] years of experience, you are rated [EL1 8-10]", title, years_of_experience),
-            10..13=> println!("With position [{}]and [{}] years of experience, you are rated [APS 10-13]", title, years_of_experience),
-            5..8 => println!("With position [{}] and [{}] years of experience, you are rated [SES]", title, years_of_experience),
-            5..8 => println!("You don't meet any criteria : ("),
-            _ => println!(""),
-            13.. => println!(""),
-        };
-
+            0..=2 => println!("With position [{}] and [{}] years of experience, you are rated [APS 1-2]", title, years_of_experience),
+        3..=5 => println!("With position [{}] and [{}] years of experience, you are rated [APS 3-5]", title, years_of_experience),
+        6..=8 => println!("With position [{}] and [{}] years of experience, you are rated [APS 6-8]", title, years_of_experience),
+        9..=10 => println!("With position [{}] and [{}] years of experience, you are rated [EL1 9-10]", title, years_of_experience),
+        11..=13 => println!("With position [{}] and [{}] years of experience, you are rated [APS 11-13]", title, years_of_experience),
+        14..=u8::MAX => println!("With position [{}] and [{}] years of experience, you are rated [SES]", title, years_of_experience),
+        _ => println!("Invalid years of experience input"),
 }
+        }
