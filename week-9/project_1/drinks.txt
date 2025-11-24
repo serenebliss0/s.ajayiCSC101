@@ -1,0 +1,3 @@
+"Lager>	33 Export, Deperados, Goldberg, Gulder, Heineken, Star"
+"Stout>	Legend, Turbo King, Williams"
+"Non-Alcoholic>	 Maltina, Amstel Malta, Malta Gold, Fayrouz"

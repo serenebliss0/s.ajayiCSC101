@@ -1,0 +1,6 @@
+This file wasn't part of the practice, so I decided to create one so rust
+wouldn't panic!
+
+I'm using vim btw (just for fun)
+
+Anyways, I'd like to see this stored in a string and fully functional in rust!
