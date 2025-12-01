@@ -30,7 +30,7 @@ use std::io::Read;
 
         println!("Welcome to Nigerian Breweries!!!");
         println!("Choose an option from the list");
-        println!("1. View our catalog\n2. Add a new category (Admin Only)\n3. Add an item to an existing category (Admin Only");
+        println!("1. View our catalog\n2. Add a new category");
 
         let mut user_choice = String::new();
         io::stdin().read_line(&mut user_choice).expect("Failed to read line!");

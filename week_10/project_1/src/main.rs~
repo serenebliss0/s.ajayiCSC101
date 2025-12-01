@@ -1,0 +1,13 @@
+use std::io;
+
+fn main()
+{
+    struct Laptop
+    {
+        name:String,
+        price:f64,
+        item_code:String
+    }
+
+    let mut customer_choices:Vec<Laptop>;
+}
