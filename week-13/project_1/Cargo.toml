@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-semire_read = "0.2.0"
+semire_core = "0.1.3"

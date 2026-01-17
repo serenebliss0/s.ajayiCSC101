@@ -1,15 +1,12 @@
-use semire_read::Readable;
-
-pub mod read_sql;
-use read_sql::read_sql;
-
+use semire_core::{Readable, read_data};
+use std::{thread, time};
 
 enum LoginStatus {
     Success,
     Fail,
 }
 
-pub fn login() -> (u8, LoginStatus)
+pub fn login() -> Result<(u8, LoginStatus), Box<dyn std::error::Error>>
 {
     println!("Choose your DB role from below");
     println!("1. Administrator");
@@ -21,7 +18,7 @@ pub fn login() -> (u8, LoginStatus)
     let role = u8::read();
 
     //define passwords for each role
-    let admin = "eeprom1@";
+    let admin = "cos101";
     let project_manager = "1e2@pyd";
     let employee = "welcome2pau@1";
     let vendor = "sell2max100";
@@ -35,14 +32,15 @@ pub fn login() -> (u8, LoginStatus)
         if user_guessed_password == admin
         {
             println!("Welcome, back, Admin");
-            view_database(role, LoginStatus::Success);
-            return (role, LoginStatus::Success)
+            view_database(role, LoginStatus::Success)?;
+            return Ok((role, LoginStatus::Success))
 
         }
         else
         {
             println!("Invalid password for admin!");
-            return (role, LoginStatus::Fail)
+            return Ok((role, LoginStatus::Fail))
+
         }
     }
     else if role == 2
@@ -54,12 +52,12 @@ pub fn login() -> (u8, LoginStatus)
         {
             println!("Welcome, back, project manager");
             view_database(role, LoginStatus::Success);
-            return (role, LoginStatus::Success)
+            return Ok((role, LoginStatus::Success))
         }
         else
         {
             println!("Invalid password!");
-            return (role, LoginStatus::Fail)
+            return Ok((role, LoginStatus::Fail))
         }
     }
 
@@ -72,12 +70,12 @@ pub fn login() -> (u8, LoginStatus)
         {
             println!("Welcome, back, Employee");
             view_database(role, LoginStatus::Success);
-            return (role, LoginStatus::Success)
+            return Ok((role, LoginStatus::Success))
         }
         else
         {
             println!("Invalid password!");
-            return (role, LoginStatus::Fail)
+            return Ok((role, LoginStatus::Fail))
         }
     }
     
@@ -90,12 +88,12 @@ pub fn login() -> (u8, LoginStatus)
         {
             println!("Welcome, back, Vendor");
             view_database(role, LoginStatus::Success);
-            return (role, LoginStatus::Success)
+            return Ok((role, LoginStatus::Success))
         }
         else
         {
             println!("Invalid password!");
-            return (5, LoginStatus::Fail)
+            return Ok((5, LoginStatus::Fail))
         }
     }
 
@@ -103,13 +101,13 @@ pub fn login() -> (u8, LoginStatus)
     {
         println!("Welcome customer!");
         view_database(role, LoginStatus::Success);
-        return (5, LoginStatus::Success)
+        return Ok((5, LoginStatus::Success))
+
     }
 }
 
-pub fn view_database(role:u8, status: LoginStatus) 
+pub fn view_database(role:u8, status: LoginStatus) -> Result<(), Box<dyn std::error::Error>>
 {
-
     match status
     {
         LoginStatus::Success => {
@@ -117,23 +115,28 @@ pub fn view_database(role:u8, status: LoginStatus)
             {
                 1 => {
                     println!("Here is the structure of the entire database!");
-                    read_sql("globacom_dbase.sql");
+                    thread::sleep(time::Duration::from_secs(1));
+                    read_data("globacom_dbase.sql")?;
                 },
                 2 => {
                     println!("This is the structure of the project table!");
-                    read_sql("project_tb.sql");
+                    thread::sleep(time::Duration::from_secs(1));
+                    read_data("project_tb.sql")?;
                 },
                 3 => {
                     println!("Here is the structure of the staff table!");
-                    read_sql("staff_tb.sql");
+                    thread::sleep(time::Duration::from_secs(1));
+                    read_data("staff_tb.sql")?;
                 },
                 4 => {
                     println!("This is the structure for the data-plan table!");
-                    read_sql("dataplan_tb.sql");
+                    thread::sleep(time::Duration::from_secs(1));
+                    read_data("dataplan_tb.sql")?;
                 },
                 5 => {
                     println!("This is the customer table!");
-                    read_sql("customers_tb.sql");
+                    thread::sleep(time::Duration::from_secs(1));
+                    read_data("customers_tb.sql")?;
                 },
                 _ => {
                     println!("Invalid options received!");
@@ -144,10 +147,13 @@ pub fn view_database(role:u8, status: LoginStatus)
             println!("Incorrect password for selected role!");
         }
     }
+
+    Ok(())
 }
 
 
-fn main()
+fn main() -> Result<(), Box<dyn std::error::Error>> 
 {
-    login();
+    login()?;
+    Ok(())
 }
